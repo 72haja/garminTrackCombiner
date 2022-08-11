@@ -1,19 +1,28 @@
 {
   "name": "garmincombinetracks",
-  "private": true,
   "version": "0.0.0",
-  "type": "module",
+  "private": true,
   "scripts": {
-    "dev": "vite --port 8081",
+    "serve": "vite preview",
     "build": "vite build",
+    "dev": "vite --port 8081",
     "preview": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.2.37"
+    "@mdi/font": "5.9.55",
+    "roboto-fontface": "*",
+    "vue": "^3.2.37",
+    "vuetify": "^3.0.0-beta.0",
+    "webfontloader": "^1.0.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.0.0",
+    "node-sass": "^7.0.1",
+    "sass": "^1.54.4",
+    "sass-loader": "^13.0.2",
     "vite": "^3.0.0",
+    "vite-plugin-vuetify": "^1.0.0-alpha.0",
     "vue-cli-plugin-vuetify": "~2.5.1"
-  }
+  },
+  "type": "module"
 }

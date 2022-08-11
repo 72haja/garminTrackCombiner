@@ -1,24 +1,35 @@
 <script setup>
 import { ref } from 'vue';
+import FileList from './FileList.vue';
 
-emits: ['files-changed']
+const emit = defineEmits(['files-changed'])
 
 const files = ref([])
 
-function onFilesChanged (files) {
-  this.$emit('files-changed', files)
+function onFilesChanged () {
+  emit('files-changed', files.value)
+}
+
+function removeFile (file) {
+  files.value = files.value.filter((localFile) => localFile.name !== file.name)
+  onFilesChanged()
 }
 </script>
 
 <template>
-  <v-file-input accept=".tcx"
-                label="TXC-Dateien"
-                outlined
-                chips
-                counter
-                v-model="files"
-                @change="onFilesChanged"
-                multiple></v-file-input>
+  <div>
+    <v-file-input accept=".tcx"
+                  label="TXC-Dateien"
+                  outlined
+                  chips
+                  counter
+                  v-model="files"
+                  class="w-100"
+                  @change="onFilesChanged"
+                  multiple></v-file-input>
+    <FileList :local-files="files"
+              @remove-file="removeFile" />
+  </div>
 </template>
 <style lang='scss'>
 </style>

@@ -23,3 +23,6 @@ html {
   width: 100vw;
 }
 </style>
+<style>
+@import "./style.css";
+</style>

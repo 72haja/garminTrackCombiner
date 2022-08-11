@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <p class="h1 text-red">
+  <p class="text-h2 text-grey">
     Garmin Track-Combiner
   </p>
 </template>
