@@ -2,23 +2,35 @@
 import { ref, computed } from 'vue';
 
 import FileUploader from './FileUploader.vue';
-import CombinedValues from './CombinedValues.vue';
+import FileValidator from './FileValidator.vue';
 
 const localFiles = ref([])
-const combinedFile = ref("")
+const combinedFile = ref({})
 const combining = ref(false)
+
+const filesLoaded = ref(false)
 
 const allLabs = ref([])
 
+const errorExists = ref(false)
+
 function updateLocalFiles (files) {
-  files.forEach((file) => {
+  let filesCounter = 0;
+  filesLoaded.value = false
+  localFiles.value = []
+
+  files.forEach((file, index) => {
     var reader = new FileReader();
     reader.onload = (event) => {
       if (localFiles.value.findIndex((f) => f.name === file.name) === -1) {
         localFiles.value.push({
           name: file.name,
-          content: event.target.result
+          content: getXmlDoc(event.target.result)
         });
+      }
+      filesCounter += 1;
+      if (files.length === filesCounter) {
+        filesLoaded.value = true
       }
     }
     reader.readAsText(file)
@@ -30,9 +42,7 @@ function combineFiles () {
 
   resetLaps();
 
-  const xmlDocs = getXmlDocs()
-
-  xmlDocs.forEach((doc) => {
+  localFiles.value.map(doc => doc.content).forEach((doc) => {
     setLaps(doc)
   })
 
@@ -46,11 +56,9 @@ function resetLaps () {
   allLabs.value = []
 }
 
-function getXmlDocs () {
-  return localFiles.value.map((file) => {
-    const parser = new DOMParser();
-    return parser.parseFromString(file.content, "text/xml");
-  })
+function getXmlDoc (content) {
+  const parser = new DOMParser();
+  return parser.parseFromString(content, "text/xml");
 }
 
 function setLaps (doc) {
@@ -75,22 +83,18 @@ function setXmlCombinedFileValues () {
     content: firstFile.content,
   }
 
-  const rootParser = new DOMParser();
-  const rootXmlDoc = rootParser.parseFromString(combinedFile.value.content, "text/xml");
-
-
-  const activities = rootXmlDoc.getElementsByTagName("Activity")[0]
+  const activities = firstFile.content.getElementsByTagName("Activity")[0]
 
   removeCurrentLapEntriesInActivities(activities)
 
   addAllLapsToActivities(activities)
 
-  const parsedXmlElement = new XMLSerializer().serializeToString(rootXmlDoc);
+  const parsedXmlElement = new XMLSerializer().serializeToString(firstFile.content);
 
   combinedFile.value.content = parsedXmlElement
 }
 
-function removeCurrentLapEntriesInActivities(activities) {
+function removeCurrentLapEntriesInActivities (activities) {
   const laps = activities.getElementsByTagName("Lap")
   for (let i = laps.length - 1; i >= 0; i--) {
     laps[i].parentNode.removeChild(laps[i])
@@ -117,23 +121,33 @@ function downloadCombinedFile () {
   URL.revokeObjectURL(url)
 }
 
+const localFilesLength = computed(() => {
+  return localFiles.value.length
+})
+
+function setErrorExists (propErrorExists) {
+  errorExists.value = propErrorExists
+}
+
 </script>
 
 <template>
   <div class="file-combine-wrapper w-100 h-100 d-flex flex-column">
     <FileUploader @files-changed="updateLocalFiles" />
+    <FileValidator v-if="filesLoaded"
+                   :files="localFiles"
+                   @error-exists="setErrorExists" />
     <v-btn outlined
            color="grey darken-2"
-           :disabled="localFilesAreLessThan2"
+           :disabled="localFilesAreLessThan2 || errorExists"
            :loading="combining"
            @click="combineFiles"
            class="w-max-content">
       Kombinieren
     </v-btn>
-    <!-- <CombinedValues :combined-values="xmlCombinedValues" /> -->
     <v-btn outlined
            color="grey darken-2"
-           :disabled="allLabs.length < 1"
+           :disabled="allLabs.length < 1 || errorExists"
            @click="downloadCombinedFile"
            class="w-max-content">
       Download Kombiniertes File

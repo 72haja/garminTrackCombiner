@@ -1,19 +1,24 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, watch, computed } from 'vue';
 import FileList from './FileList.vue';
 
 const emit = defineEmits(['files-changed'])
 
 const files = ref([])
 
-function onFilesChanged () {
+function emitFilesChanged () {
   emit('files-changed', files.value)
 }
 
-function removeFile (file) {
-  files.value = files.value.filter((localFile) => localFile.name !== file.name)
-  onFilesChanged()
+function removeFile (fileName) {
+  files.value = files.value.filter((localFile) => localFile.name !== fileName)
 }
+
+const fileLength = computed(() => files.value.length)
+
+watch(files, async () => {
+  emitFilesChanged();
+})
 </script>
 
 <template>
@@ -23,12 +28,22 @@ function removeFile (file) {
                   outlined
                   chips
                   counter
+                  :key="fileLength"
+                  clearable
                   v-model="files"
                   class="w-100"
-                  @change="onFilesChanged"
-                  multiple></v-file-input>
-    <FileList :local-files="files"
-              @remove-file="removeFile" />
+                  multiple>
+      <template #selection="item">
+        <v-chip v-for="(file, index) in item.fileNames"
+                :key="index"
+                closable
+                @click:close.stop="removeFile(file)">
+          {{ file }}
+        </v-chip>
+      </template>
+    </v-file-input>
+    <!-- <FileList :local-files="files"
+              @remove-file="removeFile" /> -->
   </div>
 </template>
 <style lang='scss'>
