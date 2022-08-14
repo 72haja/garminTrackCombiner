@@ -1,3 +1,5 @@
+/// <reference types="vitest" />
+
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
@@ -6,8 +8,16 @@ import vuetify from 'vite-plugin-vuetify'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
+	plugins: [
 		vue(),
 		vuetify({ autoImport: true }),
-]
+	],
+	test: {
+		globals: true,
+		setupFiles: "vuetify.config.js",
+		environment: 'jsdom',
+		deps: {
+			inline: ["vuetify"],
+		},
+	},
 })
