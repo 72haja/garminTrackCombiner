@@ -1,0 +1,27 @@
+// Vitest Snapshot v1
+
+exports[`mount App > mount component 1`] = `
+"<div class=\\"pa-4 custom-list\\" data-v-45a53a49=\\"\\">
+  <div class=\\"v-list-item v-theme--light v-list-item--density-default elevation-2 v-list-item--variant-text\\" data-v-45a53a49=\\"\\">
+    <!----><span class=\\"v-list-item__underlay\\"></span>
+    <!---->
+    <div class=\\"v-list-item__content\\">
+      <!---->
+      <!---->
+      <div class=\\"d-flex justify-space-between align-center\\" data-v-45a53a49=\\"\\"><span data-v-45a53a49=\\"\\">testFile1Xml</span><span data-v-45a53a49=\\"\\">Biking</span></div>
+    </div>
+    <!---->
+  </div>
+  <div class=\\"v-list-item v-theme--light v-list-item--density-default elevation-2 v-list-item--variant-text\\" data-v-45a53a49=\\"\\">
+    <!----><span class=\\"v-list-item__underlay\\"></span>
+    <!---->
+    <div class=\\"v-list-item__content\\">
+      <!---->
+      <!---->
+      <div class=\\"d-flex justify-space-between align-center\\" data-v-45a53a49=\\"\\"><span data-v-45a53a49=\\"\\">testFile2Xml</span><span data-v-45a53a49=\\"\\">Biking</span></div>
+    </div>
+    <!---->
+  </div>
+</div>
+<!--v-if-->"
+`;

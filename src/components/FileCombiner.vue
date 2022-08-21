@@ -121,10 +121,6 @@ function downloadCombinedFile () {
   URL.revokeObjectURL(url)
 }
 
-const localFilesLength = computed(() => {
-  return localFiles.value.length
-})
-
 function setErrorExists (propErrorExists) {
   errorExists.value = propErrorExists
 }

@@ -25,7 +25,10 @@ watch(() => props.files, async () => {
 const errorMessageLength = computed(() => errorMessage.value?.length || 0)
 
 function getFileActivityTypes () {
-  if (!props.files) return []
+  if (!props.files) {
+    fileActivityTypes.value = []
+    return
+  }
 
   fileActivityTypes.value = props.files.map((file) => {
     const sportType = file.content.getElementsByTagName("Activity")[0].getAttribute("Sport")
@@ -38,6 +41,8 @@ function getFileActivityTypes () {
 }
 
 function checkIfAllDocsHaveSameActivity () {
+  if (fileActivityTypes.value.length === 0) return
+
   emit("error-exists", false)
   const firstActivity = fileActivityTypes.value[0].sportType
   fileActivityTypes.value.forEach((doc) => {

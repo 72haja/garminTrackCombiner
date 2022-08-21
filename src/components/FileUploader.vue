@@ -1,20 +1,19 @@
 <script setup>
 import { ref, watch, computed } from 'vue';
-import FileList from './FileList.vue';
 
 const emit = defineEmits(['files-changed'])
 
 const files = ref([])
 
 function emitFilesChanged () {
-  emit('files-changed', files.value)
+  emit('files-changed', files.value || [])
 }
 
 function removeFile (fileName) {
-  files.value = files.value.filter((localFile) => localFile.name !== fileName)
+  files.value = files.value?.filter((localFile) => localFile.name !== fileName) || []
 }
 
-const fileLength = computed(() => files.value.length)
+const fileLength = computed(() => files.value?.length || 0)
 
 watch(files, async () => {
   emitFilesChanged();
@@ -42,8 +41,6 @@ watch(files, async () => {
         </v-chip>
       </template>
     </v-file-input>
-    <!-- <FileList :local-files="files"
-              @remove-file="removeFile" /> -->
   </div>
 </template>
 <style lang='scss'>

@@ -1,7 +1,7 @@
 import { describe } from 'vitest'
 import { mount } from '@vue/test-utils'
 
-import vuetify, { createVuetify } from 'vuetify'
+import { createVuetify } from 'vuetify'
 
 import App from '../App.vue'
 
