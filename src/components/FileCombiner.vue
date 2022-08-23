@@ -1,4 +1,5 @@
 <script setup>
+import { type } from 'os';
 import { ref, computed } from 'vue';
 
 import FileUploader from './FileUploader.vue';
@@ -14,9 +15,13 @@ const allLabs = ref([])
 
 const errorExists = ref(false)
 
+const setFileLoader = (value) => {
+  filesLoaded.value = value
+}
+
 function updateLocalFiles (files) {
   let filesCounter = 0;
-  filesLoaded.value = false
+  setFileLoader(false)
   localFiles.value = []
 
   files.forEach((file, index) => {
@@ -30,7 +35,7 @@ function updateLocalFiles (files) {
       }
       filesCounter += 1;
       if (files.length === filesCounter) {
-        filesLoaded.value = true
+        setFileLoader(true)
       }
     }
     reader.readAsText(file)

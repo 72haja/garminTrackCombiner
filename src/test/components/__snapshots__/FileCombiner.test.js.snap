@@ -1,0 +1,69 @@
+// Vitest Snapshot v1
+
+exports[`mount App > mount component 1`] = `
+"<div class=\\"file-combine-wrapper w-100 h-100 d-flex flex-column\\" data-v-99329846=\\"\\">
+  <div data-v-99329846=\\"\\">
+    <div class=\\"v-input v-input--horizontal v-input--density-default v-file-input w-100\\">
+      <div class=\\"v-input__prepend\\"><i class=\\"mdi-paperclip mdi v-icon notranslate v-theme--light v-icon--size-default v-icon--clickable\\" aria-hidden=\\"true\\"></i>
+        <!---->
+      </div>
+      <div class=\\"v-input__control\\">
+        <div class=\\"v-field v-field--appended v-field--has-label v-field--variant-filled v-theme--light\\" prepend-icon=\\"$file\\">
+          <div class=\\"v-field__overlay\\"></div>
+          <div class=\\"v-field__loader\\">
+            <div class=\\"v-progress-linear v-theme--light\\" style=\\"height: 0px; --v-progress-linear-height: 2px;\\" role=\\"progressbar\\" aria-valuemin=\\"0\\" aria-valuemax=\\"100\\">
+              <!---->
+              <div class=\\"v-progress-linear__background\\" style=\\"width: 100%;\\"></div>
+              <transition-stub>
+                <div class=\\"v-progress-linear__indeterminate\\">
+                  <div class=\\"v-progress-linear__indeterminate long\\"></div>
+                  <div class=\\"v-progress-linear__indeterminate short\\"></div>
+                </div>
+              </transition-stub>
+              <!---->
+            </div>
+          </div>
+          <!---->
+          <div class=\\"v-field__field\\" data-no-activator=\\"\\"><label class=\\"v-label v-field-label v-field-label--floating\\" aria-hidden=\\"true\\">
+              <!---->TXC-Dateien
+            </label><label class=\\"v-label v-field-label\\" for=\\"input-1\\">
+              <!---->TXC-Dateien
+            </label><input type=\\"file\\" multiple=\\"\\" id=\\"input-1\\" accept=\\".tcx\\" outlined=\\"\\">
+            <!---->
+          </div>
+          <transition-stub>
+            <div class=\\"v-field__clearable\\" style=\\"display: none;\\"><i class=\\"mdi-close-circle mdi v-icon notranslate v-theme--light v-icon--size-default v-icon--clickable\\" aria-hidden=\\"true\\"></i></div>
+          </transition-stub>
+          <div class=\\"v-field__append-inner\\">
+            <!---->
+            <!---->
+          </div>
+          <div class=\\"v-field__outline\\">
+            <!---->
+            <!---->
+          </div>
+        </div>
+      </div>
+      <!---->
+      <div class=\\"v-input__details\\">
+        <transition-group-stub tag=\\"div\\" class=\\"v-messages\\">
+          <!---->
+        </transition-group-stub>
+        <!----><span></span>
+        <transition-stub>
+          <div class=\\"v-counter\\" style=\\"display: none;\\">0 files</div>
+        </transition-stub>
+      </div>
+    </div>
+  </div>
+  <!--v-if--><button type=\\"button\\" class=\\"v-btn v-btn--disabled v-theme--light bg-grey darken-2 v-btn--density-default v-btn--size-default v-btn--variant-elevated w-max-content\\" disabled=\\"\\" outlined=\\"\\" data-v-99329846=\\"\\"><span class=\\"v-btn__overlay\\"></span><span class=\\"v-btn__underlay\\"></span>
+    <!----><span class=\\"v-btn__content\\" data-no-activator=\\"\\"> Kombinieren </span>
+    <!---->
+    <!---->
+  </button><button type=\\"button\\" class=\\"v-btn v-btn--disabled v-theme--light bg-grey darken-2 v-btn--density-default v-btn--size-default v-btn--variant-elevated w-max-content\\" disabled=\\"\\" outlined=\\"\\" data-v-99329846=\\"\\"><span class=\\"v-btn__overlay\\"></span><span class=\\"v-btn__underlay\\"></span>
+    <!----><span class=\\"v-btn__content\\" data-no-activator=\\"\\"> Download Kombiniertes File </span>
+    <!---->
+    <!---->
+  </button>
+</div>"
+`;
