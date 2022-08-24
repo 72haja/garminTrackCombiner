@@ -1,5 +1,4 @@
 <script setup>
-import { type } from 'os';
 import { ref, computed } from 'vue';
 
 import FileUploader from './FileUploader.vue';
