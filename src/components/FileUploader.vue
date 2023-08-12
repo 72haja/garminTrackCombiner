@@ -1,16 +1,13 @@
 <script setup>
 import { ref, watch, computed } from 'vue';
+import DropZone from './DropZone.vue';
+import useFileList from '../utils/file-list'
+const { files, addFiles, removeFile } = useFileList()
 
 const emit = defineEmits(['files-changed'])
 
-const files = ref([])
-
 function emitFilesChanged () {
   emit('files-changed', files.value || [])
-}
-
-function removeFile (fileName) {
-  files.value = files.value?.filter((localFile) => localFile.name !== fileName) || []
 }
 
 const fileLength = computed(() => files.value?.length || 0)
@@ -21,16 +18,17 @@ watch(files, async () => {
 </script>
 
 <template>
-  <div>
+  <DropZone @files-dropped="addFiles"
+            #default="{ dropZoneActive }">
     <v-file-input accept=".tcx"
-                  label="TXC-Dateien"
-                  outlined
                   chips
+                  :label="dropZoneActive ? 'Drop Them Here' : 'Drag Your Files Here or Click'"
                   counter
                   :key="fileLength"
                   clearable
+                  prepend-icon=""
                   v-model="files"
-                  class="w-100"
+                  class="w-100 h-100 custom-input-field"
                   multiple>
       <template #selection="item">
         <v-chip v-for="(file, index) in item.fileNames"
@@ -41,7 +39,15 @@ watch(files, async () => {
         </v-chip>
       </template>
     </v-file-input>
-  </div>
+  </DropZone>
 </template>
-<style lang='scss'>
+<style lang='scss' scoped>
+.custom-input-field.v-input--horizontal {
+  grid-template-rows: auto 0;
+}
+</style>
+<style lang="scss">
+.custom-input-field.v-input--horizontal .v-field--variant-filled .v-field__outline::before {
+  border-width: 0;
+}
 </style>

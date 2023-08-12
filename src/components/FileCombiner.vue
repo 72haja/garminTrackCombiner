@@ -37,7 +37,11 @@ function updateLocalFiles (files) {
         setFileLoader(true)
       }
     }
-    reader.readAsText(file)
+    if (typeof file === "Blob") {
+      reader.readAsText(file)
+      } else {
+      reader.readAsText(file.file)
+    }
   })
 }
 
